@@ -1,0 +1,528 @@
+/* ══════════════════════════════════════════
+   Frame.css — Make-a-Thon card styles
+   html2canvas compatible — NO clamp(), NO var()
+   ══════════════════════════════════════════ */
+
+/* ── Color tokens (for browser, but hardcoded below for html2canvas) ── */
+:root {
+  --maroon: #5C1B1B;
+  --pink: #F3A7C8;
+  --lime: #E4EE86;
+  --cream: #FBF8F2;
+  --gray: #E7E5E1;
+  --pill-yellow: #F0ED9F;
+  --pill-pink: #F3AFC9;
+}
+
+/* ── Outer wrapper ── */
+.frame-outer {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Checkerboard border ── */
+.frame-checkerboard {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 18px;
+  /* Checkerboard using linear-gradient (html2canvas compatible) */
+  background-color: #E4EE86;
+  background-image:
+    linear-gradient(45deg, #F3A7C8 25%, transparent 25%, transparent 75%, #F3A7C8 75%),
+    linear-gradient(45deg, #F3A7C8 25%, transparent 25%, transparent 75%, #F3A7C8 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  border-radius: 16px;
+}
+
+/* ── Inner cream card ── */
+.frame-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #FBF8F2;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ── Decorative dashed guide lines ── */
+.guide {
+  position: absolute;
+  border-color: #5C1B1B;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.guide-top {
+  top: 14px; left: 14px; right: 14px;
+  border-top: 2px dashed #5C1B1B;
+}
+
+.guide-bottom {
+  bottom: 14px; left: 14px; right: 14px;
+  border-bottom: 2px dashed #5C1B1B;
+}
+
+.guide-left {
+  left: 14px; top: 14px; bottom: 14px;
+  border-left: 2px dashed #5C1B1B;
+}
+
+.guide-right {
+  right: 14px; top: 14px; bottom: 14px;
+  border-right: 2px dashed #5C1B1B;
+}
+
+/* Bottom right cutout box */
+.guide-cutout-top {
+  bottom: 18%; right: 14px; width: calc(18% - 14px);
+  border-top: 2px dashed #5C1B1B;
+}
+.guide-cutout-left {
+  bottom: 14px; right: 18%; height: calc(18% - 14px);
+  border-left: 2px dashed #5C1B1B;
+}
+.guide-cutout-bottom {
+  bottom: 14px; right: 14px; width: calc(18% - 14px);
+  border-bottom: 2px dashed #5C1B1B;
+}
+.guide-cutout-right {
+  bottom: 14px; right: 14px; height: calc(18% - 14px);
+  border-right: 2px dashed #5C1B1B;
+}
+
+/* Left edge broken ticks */
+.guide-tick {
+  position: absolute;
+  left: 0;
+  width: 14px;
+  border-top: 2px dashed #5C1B1B;
+  opacity: 0.6;
+  z-index: 1;
+}
+.tick-1 { top: 25%; }
+.tick-2 { top: 40%; }
+.tick-3 { top: 55%; }
+.tick-4 { top: 70%; }
+
+/* ── Decorative stars (outer, UI only) ── */
+.star {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.star-top-right {
+  top: 2px;
+  right: -8px;
+}
+
+.star-bottom-left {
+  bottom: 60px;
+  left: -18px;
+}
+
+/* ── Card decorations (inside card, included in download) ── */
+.card-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.deco-top-left { top: 22%; left: 16px; }
+.deco-top-right { top: 15%; right: 18px; }
+.deco-right-mid { right: 16px; top: 42%; }
+.deco-bottom-left { bottom: 90px; left: 16px; }
+.deco-bottom-right { bottom: 32px; right: 24px; }
+.deco-left-mid { left: 14px; top: 58%; }
+
+.logo-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 6px 14px;
+  max-width: 100%;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.logo-pill::before {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -2px; left: -2px; right: -2px;
+  background: #fff;
+  border: 2px solid #5C1B1B;
+  border-radius: 999px;
+  z-index: -1;
+}
+.logo-pill::after {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -6px; left: -2px; right: -2px;
+  background: #5C1B1B;
+  border-radius: 999px;
+  z-index: -2;
+}
+
+.logo-img {
+  height: 30px;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.logo-fofkol { max-width: 90px; }
+.logo-tmsl { height: 32px; max-width: 32px; }
+.logo-gdg { max-width: 120px; }
+.logo-leo { max-width: 55px; }
+
+.logo-separator {
+  color: #5C1B1B;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Title block ── */
+.title-block {
+  text-align: center;
+  margin-top: 14px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.title-attending {
+  font-family: 'Baloo 2', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 15px;
+  color: #5C1B1B;
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.title-main {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  color: #5C1B1B;
+  line-height: 1.1;
+  margin: 4px 0 0;
+  padding-bottom: 12px;
+}
+
+.subtitle-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 5px 16px;
+  
+  font-family: 'Baloo 2', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 13px;
+  color: #5C1B1B;
+  z-index: 2;
+}
+.subtitle-pill::before {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -2px; left: -2px; right: -2px;
+  background: #F0ED9F;
+  border: 2px solid #5C1B1B;
+  border-radius: 999px;
+  z-index: -1;
+}
+.subtitle-pill::after {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -6px; left: -2px; right: -2px;
+  background: #5C1B1B;
+  border-radius: 999px;
+  z-index: -2;
+}
+
+/* ── Photo area ── */
+.photo-area {
+  margin-top: 16px;
+  width: 78%;
+  height: 42%;
+  flex-shrink: 0;
+  background: #E7E5E1;
+  border: 2px dashed #5C1B1B;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  position: relative;
+}
+
+/*
+ * User photo — uses max-width/max-height + auto dimensions.
+ * html2canvas ignores object-fit, but this approach works because
+ * the cropper already outputs a 1:1 image, so no object-fit is needed.
+ * The image naturally scales down to fit while keeping full quality.
+ */
+.user-photo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0.7;
+}
+
+.photo-placeholder-text {
+  font-family: 'Baloo 2', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #5C1B1B;
+  font-size: 12px;
+}
+
+/* ── Remove photo button ── */
+.remove-photo-btn {
+  position: absolute;
+  top: 40%;
+  right: 14%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(92, 27, 27, 0.85);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.15s ease, background 0.15s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.remove-photo-btn:hover {
+  background: rgba(92, 27, 27, 1);
+  transform: scale(1.15);
+}
+
+/* ── Info row (date + location) ── */
+.info-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Baloo 2', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #5C1B1B;
+  font-size: 12px;
+  line-height: 14px;
+  z-index: 2;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.info-divider {
+  opacity: 0.5;
+}
+
+/* ── Bottom pill ── */
+.bottom-pill {
+  position: relative;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 7px 16px;
+
+  font-family: 'Baloo 2', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 12px;
+  color: #5C1B1B;
+  z-index: 2;
+  text-align: center;
+  flex-shrink: 0;
+}
+.bottom-pill::before {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -2px; left: -2px; right: -2px;
+  background: #F3AFC9;
+  border: 2px solid #5C1B1B;
+  border-radius: 999px;
+  z-index: -1;
+}
+.bottom-pill::after {
+  content: '';
+  position: absolute;
+  top: -2px; bottom: -6px; left: -2px; right: -2px;
+  background: #5C1B1B;
+  border-radius: 999px;
+  z-index: -2;
+}
+
+/* ══════════════════════════════════════════
+   Responsive tweaks
+   ══════════════════════════════════════════ */
+
+@media (max-width: 380px) {
+  .frame-checkerboard {
+    background-size: 45px 45px;
+    padding: 10px;
+  }
+
+  .frame-inner {
+    padding: 18px;
+  }
+
+  .logo-pill {
+    gap: 3px;
+    padding: 3px 6px;
+  }
+
+  .logo-img { height: 20px; max-width: 50px; }
+  .logo-fofkol { max-width: 55px; }
+  .logo-tmsl { height: 22px; max-width: 22px; }
+  .logo-gdg { max-width: 70px; }
+  .logo-leo { max-width: 40px; }
+  .logo-separator { font-size: 12px; }
+  .title-attending { font-size: 11px; }
+  .title-main { font-size: 22px; }
+  .subtitle-pill { font-size: 10px; padding: 4px 10px; }
+  .info-row { font-size: 9px; gap: 4px; margin-top: 6px; }
+  .bottom-pill { font-size: 9px; padding: 5px 10px; margin-top: 6px; }
+
+  .star-top-right { top: 0; right: -5px; }
+  .star-bottom-left { bottom: 45px; left: -12px; }
+  .remove-photo-btn { width: 24px; height: 24px; font-size: 12px; }
+}
+
+@media (min-width: 381px) and (max-width: 480px) {
+  .frame-checkerboard {
+    background-size: 55px 55px;
+    padding: 14px;
+  }
+  .frame-inner {
+    padding: 18px;
+  }
+  .logo-pill { gap: 5px; padding: 4px 10px; }
+  .logo-img { height: 25px; max-width: 75px; }
+  .logo-fofkol { max-width: 80px; }
+  .logo-tmsl { height: 26px; max-width: 26px; }
+  .logo-gdg { max-width: 100px; }
+  .logo-leo { max-width: 45px; }
+  .logo-separator { font-size: 14px; }
+  .title-attending { font-size: 13px; }
+  .title-main { font-size: 28px; padding-bottom: 8px; }
+  .subtitle-pill { font-size: 11px; padding: 5px 12px; }
+  .info-row { font-size: 10px; gap: 6px; margin-top: 8px; }
+  .bottom-pill { font-size: 10px; padding: 6px 14px; margin-top: 8px; }
+  
+  .star-top-right { top: 1px; right: -6px; }
+  .star-bottom-left { bottom: 50px; left: -15px; }
+  .remove-photo-btn { width: 26px; height: 26px; font-size: 13px; }
+}
+
+@media (min-width: 520px) {
+  .frame-checkerboard {
+    background-size: 70px 70px;
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .frame-inner { border-radius: 14px; padding: 22px; }
+  .logo-img { height: 36px; max-width: 100px; }
+  .logo-fofkol { max-width: 110px; }
+  .logo-tmsl { height: 38px; max-width: 38px; }
+  .logo-gdg { max-width: 140px; }
+  .logo-leo { max-width: 70px; }
+  .logo-separator { font-size: 18px; }
+  .title-block { margin-top: 18px; }
+  .title-attending { font-size: 17px; }
+  .title-main { font-size: 42px; margin: 4px 0 12px; }
+  .subtitle-pill { font-size: 15px; padding: 7px 18px; }
+  .photo-area { margin-top: 18px; border-radius: 22px; }
+  .info-row { margin-top: 14px; font-size: 14px; gap: 10px; }
+  .bottom-pill { margin-top: 12px; font-size: 14px; padding: 9px 20px; }
+}
+
+/* ══════════════════════════════════════════
+   html2canvas Export Overrides
+   These target the exact elements during export
+   to fix html2canvas rendering bugs
+   ══════════════════════════════════════════ */
+.is-exporting .subtitle-pill {
+  padding-top: 1px !important;
+  padding-bottom: 9px !important;
+}
+
+.is-exporting .bottom-pill {
+  padding-top: 2px !important;
+  padding-bottom: 12px !important;
+}
+
+.is-exporting .logo-separator {
+  position: relative;
+  bottom: 2px !important;
+}
+
+.is-exporting .info-item svg {
+  position: relative;
+  top: 3px !important;
+}
+
+@media (max-width: 480px) {
+  .is-exporting .subtitle-pill {
+    padding-top: 0px !important;
+    padding-bottom: 8px !important;
+  }
+  .is-exporting .bottom-pill {
+    padding-top: 1px !important;
+    padding-bottom: 9px !important;
+  }
+}

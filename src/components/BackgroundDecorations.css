@@ -1,0 +1,98 @@
+.bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0; /* behind main app content */
+  overflow: hidden;
+}
+
+/* Base animations */
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes floatDown {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(20px) rotate(-5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseSoft {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Position and animate items */
+.anim-flower, .anim-sparkle, .anim-blob {
+  position: absolute;
+}
+
+/* Top Left Flower */
+.flower-1 {
+  width: 80px;
+  top: 10%;
+  left: 8%;
+  animation: floatUp 6s ease-in-out infinite;
+}
+
+/* Bottom Right Flower */
+.flower-2 {
+  width: 100px;
+  bottom: 12%;
+  right: 8%;
+  animation: floatDown 7s ease-in-out infinite;
+}
+
+/* Sparkle Top Right */
+.sparkle-1 {
+  width: 60px;
+  top: 15%;
+  right: 15%;
+  animation: spinSlow 15s linear infinite;
+}
+
+/* Sparkle Bottom Left */
+.sparkle-2 {
+  width: 50px;
+  bottom: 20%;
+  left: 12%;
+  animation: spinSlow 12s linear infinite reverse;
+}
+
+/* Abstract Blobs */
+.blob-1 {
+  width: 300px;
+  top: -5%;
+  right: -5%;
+  animation: pulseSoft 8s ease-in-out infinite;
+  filter: blur(8px);
+}
+
+.blob-2 {
+  width: 250px;
+  bottom: -10%;
+  left: -5%;
+  animation: pulseSoft 9s ease-in-out infinite 2s;
+  filter: blur(8px);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .flower-1 { width: 60px; top: 5%; left: 5%; }
+  .flower-2 { width: 70px; bottom: 5%; right: 5%; }
+  .sparkle-1 { width: 45px; top: 8%; right: 10%; }
+  .sparkle-2 { width: 40px; bottom: 10%; left: 5%; }
+  .blob-1 { width: 200px; }
+  .blob-2 { width: 180px; }
+}
